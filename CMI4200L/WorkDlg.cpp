@@ -391,9 +391,7 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 			if (m_bInitialOk) //초기화 잡혔는지 여부 
 			{
 				m_bAutoRunning = TRUE;
-
 				
-
 				pMainDlg->Enable_ModeButton(FALSE);
 
 				if (gAlm.nType==1) Set_AlaramLog();
@@ -403,11 +401,8 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 				m_rdoWorkStop.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 				m_rdoWorkStop.Invalidate(FALSE);
 				m_chkStripStop.EnableWindow(TRUE);
-
-				g_objMES.m_bStart = TRUE;
-
-
 				
+				g_objMES.m_bStart = TRUE;				
 				if (g_objMES.m_bMESUse==FALSE || g_objMES.m_nMESSequence==3 || gData.bCleanOutMode==TRUE) 
 				{
 					CInspector *pInspector = CInspector::Get_Instance();
@@ -473,6 +468,8 @@ void CWorkDlg::OnTimer(UINT_PTR nIDEvent)
 			pMainDlg->Enable_ModeButton(TRUE);
 
 			pMainDlg->Set_LotErrorLog("STOP", 904, "Stop");
+
+			g_objMES.Set_Status(3);
 
 		} else {				// Stop
 			// Auto Start
