@@ -45,33 +45,30 @@ void CManualDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_PIC_MANUAL_BACK, m_picManualBack);
-	DDX_Control(pDX, IDC_RDO_MANUAL_FLOW, m_rdoManualFlow);
-	DDX_Control(pDX, IDC_RDO_MANUAL_ELEVATOR, m_rdoManualElevator);
-	DDX_Control(pDX, IDC_RDO_MANUAL_GRIPPER, m_rdoManualGripper);
-	DDX_Control(pDX, IDC_RDO_MANUAL_PICKER, m_rdoManualPicker);
-	DDX_Control(pDX, IDC_RDO_MANUAL_INSPECTOR, m_rdoManualInspector);
+	DDX_Control(pDX, IDC_RDO_MANUAL_LOADING, m_rdoManualLoading);
+	DDX_Control(pDX, IDC_RDO_MANUAL_LOADPICKER, m_rdoManualLoadPicker);
+	DDX_Control(pDX, IDC_RDO_MANUAL_GRIPPER, m_rdoManual_Inspector);
+	DDX_Control(pDX, IDC_RDO_MANUAL_PICKER, m_rdoManual_NgGoodPicker);
+	DDX_Control(pDX, IDC_RDO_MANUAL_UNLOADING, m_rdoManual_Unloading);
+	DDX_Control(pDX, IDC_RDO_MANUAL_UNLOADPICKER, m_rdoManual_UnloadPicker);
 	DDX_Control(pDX, IDC_RDO_MANUAL_DOOR_LOCK, m_rdoManualDoorLock);
 	DDX_Control(pDX, IDC_RDO_MANUAL_DOOR_UNLOCK, m_rdoManualDoorUnlock);
 
-	DDX_Control(pDX, IDC_RDO_MANUAL_GRIPPER2, m_rdoManualGripper2);
-	DDX_Control(pDX, IDC_RDO_MANUAL_PICKER2, m_rdoManualPicker2);
-	DDX_Control(pDX, IDC_RDO_MANUAL_ELEVATOR2, m_rdoManualElevator2);
 }
 
 BEGIN_MESSAGE_MAP(CManualDlg, CDialogEx)
 	ON_WM_DESTROY()
 	ON_WM_SHOWWINDOW()
 	ON_WM_TIMER()
-	ON_BN_CLICKED(IDC_RDO_MANUAL_FLOW, &CManualDlg::OnBnClickedRdoManualFlow)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_ELEVATOR, &CManualDlg::OnBnClickedRdoManualElevator)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_GRIPPER, &CManualDlg::OnBnClickedRdoManualGripper)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_PICKER, &CManualDlg::OnBnClickedRdoManualPicker)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_INSPECTOR, &CManualDlg::OnBnClickedRdoManualInspector)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_LOADING, &CManualDlg::OnBnClickedRdoManualLoading)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_LOADPICKER, &CManualDlg::OnBnClickedRdoManualLoadPicker)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_GRIPPER, &CManualDlg::OnBnClickedRdoManualInspector)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_PICKER, &CManualDlg::OnBnClickedRdoManualNgGoodPicker)
+	ON_BN_CLICKED(IDC_RDO_MANUAL_UNLOADING, &CManualDlg::OnBnClickedRdoManualUnloading)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_DOOR_LOCK, &CManualDlg::OnBnClickedRdoManualDoorLock)
 	ON_BN_CLICKED(IDC_RDO_MANUAL_DOOR_UNLOCK, &CManualDlg::OnBnClickedRdoManualDoorUnlock)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_GRIPPER2, &CManualDlg::OnBnClickedRdoManualGripper2)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_PICKER2, &CManualDlg::OnBnClickedRdoManualPicker2)
-	ON_BN_CLICKED(IDC_RDO_MANUAL_ELEVATOR2, &CManualDlg::OnBnClickedRdoManualElevator2)
+
+	ON_BN_CLICKED(IDC_RDO_MANUAL_UNLOADPICKER, &CManualDlg::OnBnClickedRdoManualUnloadPicker)
 END_MESSAGE_MAP()
 
 // CManualDlg ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
@@ -83,25 +80,22 @@ BOOL CManualDlg::OnInitDialog()
 	// TODO:  ¿©±â¿¡ Ãß°¡ ÃÊ±âÈ­ ÀÛ¾÷À» Ãß°¡ÇÕ´Ï´Ù.
 	SetWindowPos(this, 0, 60, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	Initial_Controls();
+	Initial_Controls();	
 
-	m_pManualFlowDlg = new CManualFlowDlg(this);
-	m_pManualFlowDlg->Create(IDD_MANUAL_FLOW_DLG, this);
+	m_pManual_InspectorDlg = new CManualElevatorDlg(this);
+	m_pManual_InspectorDlg->Create(IDD_MANUAL_INSPECTOR_DLG, this);
 
-	m_pManualElevatorDlg = new CManualElevatorDlg(this);
-	m_pManualElevatorDlg->Create(IDD_MANUAL_ELEVATOR_DLG, this);
+	m_pManual_NGGoodPickerDlg = new CManualPickerDlg(this);
+	m_pManual_NGGoodPickerDlg->Create(IDD_MANUAL_NG_GOOD_PICKER_DLG, this);
 
-	m_pManualPickerDlg = new CManualPickerDlg(this);
-	m_pManualPickerDlg->Create(IDD_MANUAL_PICKER_DLG, this);
+	m_pManual_UnloadingDlg = new CManualInspectorDlg(this);
+	m_pManual_UnloadingDlg->Create(IDD_MANUAL_UNLOADING_DLG, this);
 
-	m_pManualInspectorDlg = new CManualInspectorDlg(this);
-	m_pManualInspectorDlg->Create(IDD_MANUAL_INSPECTOR_DLG, this);
+	m_pManual_LoadPickerDlg = new CManualPicker2Dlg(this);
+	m_pManual_LoadPickerDlg->Create(IDD_MANUAL_LOADPICKER_DLG, this);
 
-	m_pManualPicker2Dlg = new CManualPicker2Dlg(this);
-	m_pManualPicker2Dlg->Create(IDD_MANUAL_PICKER2_DLG, this);
-
-	m_pManualPicker3Dlg = new CManualPicker3Dlg(this);
-	m_pManualPicker3Dlg->Create(IDD_MANUAL_PICKER3_DLG, this);
+	m_pManual_UnloadPickerDlg = new CManualPicker3Dlg(this);
+	m_pManual_UnloadPickerDlg->Create(IDD_MANUAL_UNLOADPICKER_DLG, this);
 
 	m_pManualLotDataDlg = new CManualLotDataDlg(this);
 	m_pManualLotDataDlg->Create(IDD_MANUAL_LOTDATA_DLG, this);
@@ -110,8 +104,8 @@ BOOL CManualDlg::OnInitDialog()
 	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
 	// Inspector Dlg Visible
-	m_rdoManualInspector.SetCheck(TRUE);
-	m_rdoManualInspector.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManual_Unloading.SetCheck(TRUE);
+	m_rdoManual_Unloading.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
 
 
 
@@ -123,30 +117,25 @@ void CManualDlg::OnDestroy()
 {
 	CDialogEx::OnDestroy();
 
-	m_pManualInspectorDlg->DestroyWindow();
-	m_pManualPickerDlg->DestroyWindow();
-	m_pManualElevatorDlg->DestroyWindow();
-	m_pManualFlowDlg->DestroyWindow();
+	m_pManual_UnloadingDlg->DestroyWindow();
+	m_pManual_NGGoodPickerDlg->DestroyWindow();
+	m_pManual_InspectorDlg->DestroyWindow();	
 	m_pManualLoadingDlg->DestroyWindow();
-	m_pManualPicker2Dlg->DestroyWindow();
-	m_pManualPicker3Dlg->DestroyWindow();
+	m_pManual_LoadPickerDlg->DestroyWindow();
+	m_pManual_UnloadPickerDlg->DestroyWindow();
 
-	if (m_pManualInspectorDlg) delete m_pManualInspectorDlg;
-	if (m_pManualPickerDlg) delete m_pManualPickerDlg;
-	if (m_pManualElevatorDlg) delete m_pManualElevatorDlg;
-	if (m_pManualFlowDlg) delete m_pManualFlowDlg;
-
-	if (m_pManualPicker2Dlg) delete m_pManualPicker2Dlg;
-	if (m_pManualPicker3Dlg) delete m_pManualPicker3Dlg;
+	if (m_pManual_UnloadingDlg) delete m_pManual_UnloadingDlg;
+	if (m_pManual_NGGoodPickerDlg) delete m_pManual_NGGoodPickerDlg;
+	if (m_pManual_InspectorDlg) delete m_pManual_InspectorDlg;
+	if (m_pManual_LoadPickerDlg) delete m_pManual_LoadPickerDlg;
+	if (m_pManual_UnloadPickerDlg) delete m_pManual_UnloadPickerDlg;
 	if (m_pManualLotDataDlg) delete m_pManualLotDataDlg;
 
-	m_pManualInspectorDlg = NULL;
-	m_pManualPickerDlg = NULL;
-	m_pManualElevatorDlg = NULL;
-	m_pManualFlowDlg = NULL;
-
-	m_pManualPicker2Dlg = NULL;
-	m_pManualPicker3Dlg = NULL;
+	m_pManual_UnloadingDlg = NULL;
+	m_pManual_NGGoodPickerDlg = NULL;
+	m_pManual_InspectorDlg = NULL;
+	m_pManual_LoadPickerDlg = NULL;
+	m_pManual_UnloadPickerDlg = NULL;
 	m_pManualLotDataDlg = NULL;
 	m_pManualLoadingDlg = NULL;
 }
@@ -164,17 +153,13 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	CDialogEx::OnShowWindow(bShow, nStatus);
 
 	if (bShow) {
-		if (m_rdoManualFlow.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_SHOW);
-
-		//if (m_rdoManualElevator.GetCheck()) m_pManualElevatorDlg->ShowWindow(SW_SHOW);
-		if (m_rdoManualElevator.GetCheck()) m_pManualPicker2Dlg->ShowWindow(SW_SHOW);
-		if (m_rdoManualElevator2.GetCheck()) m_pManualPicker3Dlg->ShowWindow(SW_SHOW);
-		if (m_rdoManualGripper.GetCheck()) m_pManualElevatorDlg->ShowWindow(SW_SHOW);
-		if (m_rdoManualPicker.GetCheck()) m_pManualPickerDlg->ShowWindow(SW_SHOW);
-		
-		if (m_rdoManualInspector.GetCheck()) m_pManualInspectorDlg->ShowWindow(SW_SHOW);
-		if (m_rdoManualPicker2.GetCheck()) m_pManualLotDataDlg->ShowWindow(SW_SHOW);
-
+		if (m_rdoManualLoading.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManualLoadPicker.GetCheck()) m_pManual_LoadPickerDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManual_UnloadPicker.GetCheck()) m_pManual_UnloadPickerDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManual_Inspector.GetCheck()) m_pManual_InspectorDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManual_NgGoodPicker.GetCheck()) m_pManual_NGGoodPickerDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManual_Unloading.GetCheck()) m_pManual_UnloadingDlg->ShowWindow(SW_SHOW);
+	
 //		m_rdoManualDoorLock.SetCheck(TRUE);
 //		m_rdoManualDoorUnlock.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 //		m_rdoManualDoorLock.Set_Color(RGB(0x00, 0x00, 0xFF), COLOR_DEFAULT);
@@ -188,16 +173,13 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 //		m_rdoManualDoorLock.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 //		m_rdoManualDoorUnlock.Set_Color(RGB(0x00, 0x00, 0xFF), COLOR_DEFAULT);
 
-		if (m_rdoManualFlow.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_HIDE);
-		//if (m_rdoManualElevator.GetCheck()) m_pManualElevatorDlg->ShowWindow(SW_HIDE);
-		//if (m_rdoManualGripper.GetCheck()) m_pManualGripperDlg->ShowWindow(SW_HIDE);
-		if (m_rdoManualElevator.GetCheck()) m_pManualPicker2Dlg->ShowWindow(SW_HIDE);
-		if (m_rdoManualElevator2.GetCheck()) m_pManualPicker3Dlg->ShowWindow(SW_HIDE);
-		if (m_rdoManualGripper.GetCheck()) m_pManualElevatorDlg->ShowWindow(SW_HIDE);
-
-		if (m_rdoManualPicker.GetCheck()) m_pManualPickerDlg->ShowWindow(SW_HIDE);
-		if (m_rdoManualInspector.GetCheck()) m_pManualInspectorDlg->ShowWindow(SW_HIDE);
-		if (m_rdoManualPicker2.GetCheck()) m_pManualLotDataDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManualLoading.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_HIDE);		
+		if (m_rdoManualLoadPicker.GetCheck()) m_pManual_LoadPickerDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManual_UnloadPicker.GetCheck()) m_pManual_UnloadPickerDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManual_Inspector.GetCheck()) m_pManual_InspectorDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManual_NgGoodPicker.GetCheck()) m_pManual_NGGoodPickerDlg->ShowWindow(SW_HIDE);
+		if (m_rdoManual_Unloading.GetCheck()) m_pManual_UnloadingDlg->ShowWindow(SW_HIDE);
+		
 	}
 }
 
@@ -210,18 +192,16 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 		pCommon->Check_MainEmgAir();	// Emg & Main Air
 	}
 
-	if (m_pManualFlowDlg->IsWindowVisible()) {
-		m_pManualFlowDlg->Display_Status();
-	} else if (m_pManualElevatorDlg->IsWindowVisible()) {
-		m_pManualElevatorDlg->Display_Status();
-	} else if (m_pManualPickerDlg->IsWindowVisible()) {
-		m_pManualPickerDlg->Display_Status();
-	} else if (m_pManualPicker2Dlg->IsWindowVisible()) {
-		m_pManualPicker2Dlg->Display_Status();
-	} else if (m_pManualPicker3Dlg->IsWindowVisible()) {
-		m_pManualPicker3Dlg->Display_Status();
-	} else if (m_pManualInspectorDlg->IsWindowVisible()) {
-		m_pManualInspectorDlg->Display_Status();
+	if (m_pManual_InspectorDlg->IsWindowVisible()) {
+		m_pManual_InspectorDlg->Display_Status();
+	} else if (m_pManual_NGGoodPickerDlg->IsWindowVisible()) {
+		m_pManual_NGGoodPickerDlg->Display_Status();
+	} else if (m_pManual_LoadPickerDlg->IsWindowVisible()) {
+		m_pManual_LoadPickerDlg->Display_Status();
+	} else if (m_pManual_UnloadPickerDlg->IsWindowVisible()) {
+		m_pManual_UnloadPickerDlg->Display_Status();
+	} else if (m_pManual_UnloadingDlg->IsWindowVisible()) {
+		m_pManual_UnloadingDlg->Display_Status();
 	} else if (m_pManualLotDataDlg->IsWindowVisible()) {
 		m_pManualLotDataDlg->Display_Status();
 	} else if (m_pManualLoadingDlg->IsWindowVisible()) {
@@ -232,134 +212,67 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 	CDialogEx::OnTimer(nIDEvent);
 }
 
-void CManualDlg::OnBnClickedRdoManualFlow()
+void CManualDlg::OnBnClickedRdoManualLoading()
 {
 	if (m_pManualLoadingDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Flow] Start");
-	m_rdoManualFlow.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	pLogFile->Save_HandlerLog("[Manual - Loading] Start");
+	m_rdoManualLoading.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
 	m_pManualLoadingDlg->ShowWindow(SW_SHOW);
 }
 
-void CManualDlg::OnBnClickedRdoManualElevator()
+void CManualDlg::OnBnClickedRdoManualLoadPicker()
 {
-	if (m_pManualPicker2Dlg->IsWindowVisible()) return;
+	if (m_pManual_LoadPickerDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker2] Start");
-	m_rdoManualElevator.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPicker2Dlg->ShowWindow(SW_SHOW);
-/*
-	if (m_pManualElevatorDlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Elevator] Start");
-	m_rdoManualElevator.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualElevatorDlg->ShowWindow(SW_SHOW);
-*/
-}
+	pLogFile->Save_HandlerLog("[Manual - Load Picker] Start");
+	m_rdoManualLoadPicker.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManual_LoadPickerDlg->ShowWindow(SW_SHOW);
 
-void CManualDlg::OnBnClickedRdoManualGripper()
-{
-	if (m_pManualElevatorDlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Elevator] Start");
-	m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualElevatorDlg->ShowWindow(SW_SHOW);
-/*
-	//if (m_pManualGripperDlg->IsWindowVisible()) return;
-	//Hide_Windows();
-	//CLogFile *pLogFile = CLogFile::Get_Instance();
-	//pLogFile->Save_HandlerLog("[Manual - Gripper] Start");
-	//m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	//m_pManualGripperDlg->ShowWindow(SW_SHOW);
-
-	if (m_pManualPicker2Dlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker2] Start");
-	m_rdoManualPicker2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPicker2Dlg->ShowWindow(SW_SHOW);
-*/
-}
-
-void CManualDlg::OnBnClickedRdoManualPicker()
-{
-	if (m_pManualPickerDlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker] Start");
-	m_rdoManualPicker.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPickerDlg->ShowWindow(SW_SHOW);
 }
 
 void CManualDlg::OnBnClickedRdoManualInspector()
 {
-	if (m_pManualInspectorDlg->IsWindowVisible()) return;
+	if (m_pManual_InspectorDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Inspector] Start");
-	m_rdoManualInspector.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualInspectorDlg->ShowWindow(SW_SHOW);
+	m_rdoManual_Inspector.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManual_InspectorDlg->ShowWindow(SW_SHOW);
 }
 
-void CManualDlg::OnBnClickedRdoManualGripper2()
+void CManualDlg::OnBnClickedRdoManualNgGoodPicker()
 {
-/*	
-	if (m_pManualGripper2Dlg->IsWindowVisible()) return;
+	if (m_pManual_NGGoodPickerDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Gripper2] Start");
-	m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualGripper2Dlg->ShowWindow(SW_SHOW);
-
-	if (m_pManualGripperDlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Gripper2] Start");
-	m_rdoManualGripper.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualGripperDlg->ShowWindow(SW_SHOW);
-*/
+	pLogFile->Save_HandlerLog("[Manual - Ng Good Picker] Start");
+	m_rdoManual_NgGoodPicker.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManual_NGGoodPickerDlg->ShowWindow(SW_SHOW);
 }
 
-void CManualDlg::OnBnClickedRdoManualPicker2()
+void CManualDlg::OnBnClickedRdoManualUnloading()
 {
-	if (m_pManualLotDataDlg->IsWindowVisible()) return;
+	if (m_pManual_UnloadingDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - LotData] Start");
-	m_rdoManualPicker2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualLotDataDlg->ShowWindow(SW_SHOW);
-/*
-	if (m_pManualPicker2Dlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker2] Start");
-	m_rdoManualPicker2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPicker2Dlg->ShowWindow(SW_SHOW);
-*/
+	pLogFile->Save_HandlerLog("[Manual - Unloading] Start");
+	m_rdoManual_Unloading.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManual_UnloadingDlg->ShowWindow(SW_SHOW);
 }
 
-void CManualDlg::OnBnClickedRdoManualElevator2()
-{
-	if (m_pManualPicker3Dlg->IsWindowVisible()) return;
-	Hide_Windows();
-	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Picker3] Start");
-	m_rdoManualElevator2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualPicker3Dlg->ShowWindow(SW_SHOW);
 
-/*
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-	if (m_pManualElevator2Dlg->IsWindowVisible()) return;
+void CManualDlg::OnBnClickedRdoManualUnloadPicker()
+{
+	if (m_pManual_UnloadPickerDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
-	pLogFile->Save_HandlerLog("[Manual - Elevator2] Start");
-	m_rdoManualElevator2.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualElevator2Dlg->ShowWindow(SW_SHOW);
-*/
+	pLogFile->Save_HandlerLog("[Manual - Unload Picker] Start");
+	m_rdoManual_UnloadPicker.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
+	m_pManual_UnloadPickerDlg->ShowWindow(SW_SHOW);
+
 }
 
 void CManualDlg::OnBnClickedRdoManualDoorLock()
@@ -396,38 +309,33 @@ void CManualDlg::OnBnClickedRdoManualDoorUnlock()
 void CManualDlg::Initial_Controls() 
 {
 	m_picManualBack.Init_Ctrl(RGB(0x00, 0x00, 0x00), RGB(0xE0, 0xFF, 0xE0));
-	m_rdoManualFlow.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualElevator.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualGripper.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualPicker.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualInspector.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManualLoading.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManualLoadPicker.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManual_Inspector.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManual_NgGoodPicker.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManual_Unloading.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
+	m_rdoManual_UnloadPicker.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);	
 //	m_rdoManualDoorLock.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 //	m_rdoManualDoorUnlock.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 
-	m_rdoManualElevator2.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualGripper2.Init_Ctrl("¹ÙÅÁ", 10, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
-	m_rdoManualPicker2.Init_Ctrl("¹ÙÅÁ", 12, TRUE, RGB(0x00, 0x00, 0x00), COLOR_DEFAULT, 0, 0);
 }
 
 void CManualDlg::Hide_Windows()
 {
-	m_pManualFlowDlg->ShowWindow(SW_HIDE);
-	m_pManualElevatorDlg->ShowWindow(SW_HIDE);
-	m_pManualPickerDlg->ShowWindow(SW_HIDE);
-	m_pManualPicker2Dlg->ShowWindow(SW_HIDE);
-	m_pManualPicker3Dlg->ShowWindow(SW_HIDE);
-	m_pManualInspectorDlg->ShowWindow(SW_HIDE);
+	m_pManual_InspectorDlg->ShowWindow(SW_HIDE);
+	m_pManual_NGGoodPickerDlg->ShowWindow(SW_HIDE);
+	m_pManual_LoadPickerDlg->ShowWindow(SW_HIDE);
+	m_pManual_UnloadPickerDlg->ShowWindow(SW_HIDE);
+	m_pManual_UnloadingDlg->ShowWindow(SW_HIDE);
 	m_pManualLotDataDlg->ShowWindow(SW_HIDE);
 	m_pManualLoadingDlg->ShowWindow(SW_HIDE);
 
-	m_rdoManualFlow.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualElevator.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualGripper.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualElevator2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualGripper2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualPicker2.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
-	m_rdoManualInspector.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualLoading.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManualLoadPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManual_Inspector.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManual_NgGoodPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
+	m_rdoManual_UnloadPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);	
+	m_rdoManual_Unloading.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 
 }
 

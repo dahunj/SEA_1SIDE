@@ -13,7 +13,7 @@ public:
 	virtual ~CManualElevatorDlg();
 
 	// 대화 상자 데이터입니다.
-	enum { IDD = IDD_MANUAL_ELEVATOR_DLG };
+	enum { IDD = IDD_MANUAL_INSPECTOR_DLG };
 	CStaticCS	m_stcAxisPos[6];
 	CButtonCS	m_btnVisionY[8];
 	CButtonCS	m_btnVisionA[1];

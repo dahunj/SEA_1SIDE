@@ -17,7 +17,7 @@ public:
 	virtual ~CManualInspectorDlg();
 
 	// 대화 상자 데이터입니다.
-	enum { IDD = IDD_MANUAL_INSPECTOR_DLG };
+	enum { IDD = IDD_MANUAL_UNLOADING_DLG };
 	CStaticCS	m_stcAxisPos[4];
 	CButtonCS	m_btnTR1Y[3];
 	CButtonCS	m_btnTR1Z[4];

@@ -436,30 +436,30 @@ void CInspector::Get_ScanRequest(int nInspector, CString sDir, CString sSpeed, C
 //			if (nMoldCase == 110 && dStartX > 0.0) pSequenceMain->Set_MoldScan(nDir, dSpeed, dThickZ, dStartX);
 //			else nNG = 1;
 
-		} else if (pManualDlg->m_pManualInspectorDlg->IsWindowVisible()) {	// Manual
+		} else if (pManualDlg->m_pManual_UnloadingDlg->IsWindowVisible()) {	// Manual
 
-			//int n3dCase = pManualDlg->m_pManualInspectorDlg->Get_3dRunCase();
+			//int n3dCase = pManualDlg->m_pManual_UnloadingDlg->Get_3dRunCase();
 			//if (n3dCase == 0 && dStartX >= 0.0) 
-			//	pManualDlg->m_pManualInspectorDlg->Set_3dScan(nDir, dSpeed, dThickZ, dStartX, SCAN_INSPECT);
+			//	pManualDlg->m_pManual_UnloadingDlg->Set_3dScan(nDir, dSpeed, dThickZ, dStartX, SCAN_INSPECT);
 			//else nNG = 1;
 
 		} else nNG = 1;
 	} else nNG = 1;
 
 /*
-		} else if (pManualDlg->m_pManualInspectorDlg->IsWindowVisible()) {	// Manual
+		} else if (pManualDlg->m_pManual_UnloadingDlg->IsWindowVisible()) {	// Manual
 			if (nInspector == INSPECTOR_MOLD) {
-				int nMoldCase = pManualDlg->m_pManualInspectorDlg->Get_MoldRunCase();
-				if (nMoldCase == 0) pManualDlg->m_pManualInspectorDlg->Set_MoldScan(nDir, dSpeed, dThickZ, 0.0, SCAN_INSPECT);
+				int nMoldCase = pManualDlg->m_pManual_UnloadingDlg->Get_MoldRunCase();
+				if (nMoldCase == 0) pManualDlg->m_pManual_UnloadingDlg->Set_MoldScan(nDir, dSpeed, dThickZ, 0.0, SCAN_INSPECT);
 				else nNG = 1;
 			} else if (nInspector == INSPECTOR_PCB) {
-				int nPcbCase = pManualDlg->m_pManualInspectorDlg->Get_PcbRunCase();
-				if (nPcbCase == 0) pManualDlg->m_pManualInspectorDlg->Set_PcbScan(nDir, dSpeed, dThickZ,  SCAN_INSPECT);
+				int nPcbCase = pManualDlg->m_pManual_UnloadingDlg->Get_PcbRunCase();
+				if (nPcbCase == 0) pManualDlg->m_pManual_UnloadingDlg->Set_PcbScan(nDir, dSpeed, dThickZ,  SCAN_INSPECT);
 				else nNG = 1;
 			} else if (nInspector == INSPECTOR_3D) {
-				int n3dCase = pManualDlg->m_pManualInspectorDlg->Get_3dRunCase();
+				int n3dCase = pManualDlg->m_pManual_UnloadingDlg->Get_3dRunCase();
 				if (n3dCase == 0 && dStartX >= 0.0) 
-					pManualDlg->m_pManualInspectorDlg->Set_3dScan(nDir, dSpeed, dThickZ, dStartX, SCAN_INSPECT);
+					pManualDlg->m_pManual_UnloadingDlg->Set_3dScan(nDir, dSpeed, dThickZ, dStartX, SCAN_INSPECT);
 				else nNG = 1;
 			} else nNG = 1;
 		} else nNG = 1;
@@ -805,10 +805,10 @@ void CInspector::Get_RMoveRequest(int nInspector, CString sX, CString sY, CStrin
 			//if (dZ != 0.0) pAJinAXL->Move_Relative(AX_SCAN_Z, dZ);
 //		}
 
-	} else if (pManualDlg->m_pManualInspectorDlg->IsWindowVisible()) {	// Manual
+	} else if (pManualDlg->m_pManual_UnloadingDlg->IsWindowVisible()) {	// Manual
 
 			//if (pAJinAXL->Is_Home(AX_SCAN_X) && pAJinAXL->Is_Home(AX_SCAN_Y) && pAJinAXL->Is_Home(AX_SCAN_Z)) {
-			//	int nMoldCase = pManualDlg->m_pManualInspectorDlg->Get_MoldRunCase();
+			//	int nMoldCase = pManualDlg->m_pManual_UnloadingDlg->Get_MoldRunCase();
 			//	if (nMoldCase == 0) {
 			//		nCanMove = 1;
 			//		if (dX != 0.0) pAJinAXL->Move_Absolute(AX_SCAN_X, dX);
@@ -1176,16 +1176,16 @@ void CInspector::Get_CalRequest(int nInspector, CString sDir, CString sSpeed, CS
 
 	CManualDlg *pManualDlg = CManualDlg::Get_Instance();
 
-//	if (pManualDlg->m_pManualInspectorDlg->IsWindowVisible()) {	// Manual
+//	if (pManualDlg->m_pManual_UnloadingDlg->IsWindowVisible()) {	// Manual
 ////		if (nInspector == INSPECTOR_MOLD) {
-////			int nMoldCase = pManualDlg->m_pManualInspectorDlg->Get_MoldRunCase();
-////			if (nMoldCase == 0) pManualDlg->m_pManualInspectorDlg->Set_MoldScan(nDir, dSpeed, 0.0, 0.0, SCAN_CALIBRATE);	
+////			int nMoldCase = pManualDlg->m_pManual_UnloadingDlg->Get_MoldRunCase();
+////			if (nMoldCase == 0) pManualDlg->m_pManual_UnloadingDlg->Set_MoldScan(nDir, dSpeed, 0.0, 0.0, SCAN_CALIBRATE);	
 ////		} else if (nInspector == INSPECTOR_PCB) {
-////			int nPcbCase = pManualDlg->m_pManualInspectorDlg->Get_PcbRunCase();
-////			if (nPcbCase == 0) pManualDlg->m_pManualInspectorDlg->Set_PcbScan(nDir, dSpeed, 0.0, SCAN_CALIBRATE);
+////			int nPcbCase = pManualDlg->m_pManual_UnloadingDlg->Get_PcbRunCase();
+////			if (nPcbCase == 0) pManualDlg->m_pManual_UnloadingDlg->Set_PcbScan(nDir, dSpeed, 0.0, SCAN_CALIBRATE);
 ////		} else if (nInspector == INSPECTOR_3D) {
-//			int n3dCase = pManualDlg->m_pManualInspectorDlg->Get_3dRunCase();
-//			if (n3dCase == 0) pManualDlg->m_pManualInspectorDlg->Set_3dScan(nDir, dSpeed, 0.0, dStartX, SCAN_CALIBRATE);
+//			int n3dCase = pManualDlg->m_pManual_UnloadingDlg->Get_3dRunCase();
+//			if (n3dCase == 0) pManualDlg->m_pManual_UnloadingDlg->Set_3dScan(nDir, dSpeed, 0.0, dStartX, SCAN_CALIBRATE);
 ////		}
 //	}
 	Set_CalReply(nInspector);

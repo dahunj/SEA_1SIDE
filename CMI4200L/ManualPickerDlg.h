@@ -13,7 +13,7 @@ public:
 	virtual ~CManualPickerDlg();
 
 	// 대화 상자 데이터입니다.
-	enum { IDD = IDD_MANUAL_PICKER_DLG };
+	enum { IDD = IDD_MANUAL_NG_GOOD_PICKER_DLG };
 	CStaticCS	m_stcAxisPos[5];
 
 	CButtonCS	m_btnGoodPickerX[2];

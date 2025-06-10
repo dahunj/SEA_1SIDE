@@ -2,7 +2,7 @@
 //
 #pragma once
 
-#include "ManualFlowDlg.h"
+
 #include "ManualElevatorDlg.h"
 #include "ManualPickerDlg.h"
 #include "ManualInspectorDlg.h"
@@ -31,17 +31,17 @@ public:
 	// 대화 상자 데이터입니다.
 	enum { IDD = IDD_MANUAL_DLG };
 	CPictureCS	m_picManualBack;
-	CRadioCS	m_rdoManualFlow;
-	CRadioCS	m_rdoManualElevator;
-	CRadioCS	m_rdoManualGripper;
-	CRadioCS	m_rdoManualPicker;
-	CRadioCS	m_rdoManualInspector;
+	CRadioCS	m_rdoManualLoading;
+	CRadioCS	m_rdoManualLoadPicker;
+	CRadioCS	m_rdoManual_Inspector;
+	CRadioCS	m_rdoManual_NgGoodPicker;
+	CRadioCS	m_rdoManual_Unloading;
+	CRadioCS	m_rdoManual_UnloadPicker;
 	CRadioCS	m_rdoManualDoorLock;
 	CRadioCS	m_rdoManualDoorUnlock;
 
-	CRadioCS	m_rdoManualGripper2;
-	CRadioCS	m_rdoManualPicker2;
-	CRadioCS	m_rdoManualElevator2;
+	
+	
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
@@ -51,26 +51,24 @@ protected:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnBnClickedRdoManualFlow();
-	afx_msg void OnBnClickedRdoManualElevator();
-	afx_msg void OnBnClickedRdoManualGripper();
-	afx_msg void OnBnClickedRdoManualPicker();
+	afx_msg void OnBnClickedRdoManualLoading();
+	afx_msg void OnBnClickedRdoManualLoadPicker();
 	afx_msg void OnBnClickedRdoManualInspector();
+	afx_msg void OnBnClickedRdoManualNgGoodPicker();
+	afx_msg void OnBnClickedRdoManualUnloading();
+	afx_msg void OnBnClickedRdoManualUnloadPicker();
 	afx_msg void OnBnClickedRdoManualDoorLock();
 	afx_msg void OnBnClickedRdoManualDoorUnlock();
 
-	afx_msg void OnBnClickedRdoManualGripper2();
-	afx_msg void OnBnClickedRdoManualPicker2();
-	afx_msg void OnBnClickedRdoManualElevator2();
 
-public:
-	CManualFlowDlg		*m_pManualFlowDlg;
-	CManualElevatorDlg	*m_pManualElevatorDlg;
-	CManualPickerDlg	*m_pManualPickerDlg;
-	CManualInspectorDlg	*m_pManualInspectorDlg;
 
-	CManualPicker2Dlg	*m_pManualPicker2Dlg;
-	CManualPicker3Dlg	*m_pManualPicker3Dlg;
+public:	
+	CManualElevatorDlg	*m_pManual_InspectorDlg;
+	CManualPickerDlg	*m_pManual_NGGoodPickerDlg;
+	CManualInspectorDlg	*m_pManual_UnloadingDlg;
+
+	CManualPicker2Dlg	*m_pManual_LoadPickerDlg;
+	CManualPicker3Dlg	*m_pManual_UnloadPickerDlg;
 	CManualLotDataDlg	*m_pManualLotDataDlg;
 	CManualLoadingDlg	*m_pManualLoadingDlg;
 

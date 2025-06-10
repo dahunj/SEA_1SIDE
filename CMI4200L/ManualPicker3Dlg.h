@@ -12,7 +12,7 @@ public:
 	virtual ~CManualPicker3Dlg();
 
 // 대화 상자 데이터입니다.
-	enum { IDD = IDD_MANUAL_PICKER3_DLG };
+	enum { IDD = IDD_MANUAL_UNLOADPICKER_DLG };
 	CStaticCS	m_stcAxisPos[6];
 	CButtonCS	m_btnMLPickY1[6];
 	CButtonCS	m_btnMLPickY2[4];

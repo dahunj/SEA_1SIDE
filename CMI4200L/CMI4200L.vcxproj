@@ -167,7 +167,6 @@
     <ClInclude Include="LogFile.h" />
     <ClInclude Include="ManualDlg.h" />
     <ClInclude Include="ManualElevatorDlg.h" />
-    <ClInclude Include="ManualFlowDlg.h" />
     <ClInclude Include="ManualInspectorDlg.h" />
     <ClInclude Include="ManualLoadingDlg.h" />
     <ClInclude Include="ManualLotDataDlg.h" />
@@ -229,7 +228,6 @@
     <ClCompile Include="LogFile.cpp" />
     <ClCompile Include="ManualDlg.cpp" />
     <ClCompile Include="ManualElevatorDlg.cpp" />
-    <ClCompile Include="ManualFlowDlg.cpp" />
     <ClCompile Include="ManualInspectorDlg.cpp" />
     <ClCompile Include="ManualLoadingDlg.cpp" />
     <ClCompile Include="ManualLotDataDlg.cpp" />
