@@ -171,9 +171,6 @@
     <ClInclude Include="ManualDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ManualElevatorDlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ManualPickerDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -297,9 +294,6 @@
     <ClInclude Include="ListBoxDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ManualLotDataDlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ManualLoadingDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -319,6 +313,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CapAttachUDP.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_InspectorDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -345,9 +342,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ManualDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ManualElevatorDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ManualPickerDlg.cpp">
@@ -470,9 +464,6 @@
     <ClCompile Include="ListBoxDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ManualLotDataDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ManualLoadingDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -492,6 +483,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CapAttachUDP.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_InspectorDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

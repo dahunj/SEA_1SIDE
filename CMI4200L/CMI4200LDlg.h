@@ -15,7 +15,6 @@
 #include "Common.h"
 #include "Inspector.h"
 #include "LogFile.h"
-#include "ManualLotDataDlg.h"
 #include "SequenceInit.h"
 #include "SequenceMain.h"
 #include "OperatorDlg.h"
@@ -120,7 +119,7 @@ private:
 
 	CSequenceInit	*m_pSequenceInit;
 	CSequenceMain	*m_pSequenceMain;
-	CManualLotDataDlg	*m_pManualLotDataDlg;
+	
 
 	//CExtBarcode_Honeywell *m_pExtBarcode_Honeywell;
 	CBarcode_DS1100 *m_pBarcode_DS1100;

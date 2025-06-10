@@ -82,7 +82,7 @@ BOOL CManualDlg::OnInitDialog()
 
 	Initial_Controls();	
 
-	m_pManual_InspectorDlg = new CManualElevatorDlg(this);
+	m_pManual_InspectorDlg = new CManual_InspectorDlg(this);
 	m_pManual_InspectorDlg->Create(IDD_MANUAL_INSPECTOR_DLG, this);
 
 	m_pManual_NGGoodPickerDlg = new CManualPickerDlg(this);
@@ -96,10 +96,7 @@ BOOL CManualDlg::OnInitDialog()
 
 	m_pManual_UnloadPickerDlg = new CManualPicker3Dlg(this);
 	m_pManual_UnloadPickerDlg->Create(IDD_MANUAL_UNLOADPICKER_DLG, this);
-
-	m_pManualLotDataDlg = new CManualLotDataDlg(this);
-	m_pManualLotDataDlg->Create(IDD_MANUAL_LOTDATA_DLG, this);
-
+	
 	m_pManualLoadingDlg = new CManualLoadingDlg(this);
 	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
@@ -129,14 +126,12 @@ void CManualDlg::OnDestroy()
 	if (m_pManual_InspectorDlg) delete m_pManual_InspectorDlg;
 	if (m_pManual_LoadPickerDlg) delete m_pManual_LoadPickerDlg;
 	if (m_pManual_UnloadPickerDlg) delete m_pManual_UnloadPickerDlg;
-	if (m_pManualLotDataDlg) delete m_pManualLotDataDlg;
-
+	
 	m_pManual_UnloadingDlg = NULL;
 	m_pManual_NGGoodPickerDlg = NULL;
 	m_pManual_InspectorDlg = NULL;
 	m_pManual_LoadPickerDlg = NULL;
-	m_pManual_UnloadPickerDlg = NULL;
-	m_pManualLotDataDlg = NULL;
+	m_pManual_UnloadPickerDlg = NULL;	
 	m_pManualLoadingDlg = NULL;
 }
 
@@ -202,9 +197,8 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 		m_pManual_UnloadPickerDlg->Display_Status();
 	} else if (m_pManual_UnloadingDlg->IsWindowVisible()) {
 		m_pManual_UnloadingDlg->Display_Status();
-	} else if (m_pManualLotDataDlg->IsWindowVisible()) {
-		m_pManualLotDataDlg->Display_Status();
-	} else if (m_pManualLoadingDlg->IsWindowVisible()) {
+	} 
+	else if (m_pManualLoadingDlg->IsWindowVisible()) {
 		m_pManualLoadingDlg->Display_Status();
 	}
 
@@ -326,8 +320,7 @@ void CManualDlg::Hide_Windows()
 	m_pManual_NGGoodPickerDlg->ShowWindow(SW_HIDE);
 	m_pManual_LoadPickerDlg->ShowWindow(SW_HIDE);
 	m_pManual_UnloadPickerDlg->ShowWindow(SW_HIDE);
-	m_pManual_UnloadingDlg->ShowWindow(SW_HIDE);
-	m_pManualLotDataDlg->ShowWindow(SW_HIDE);
+	m_pManual_UnloadingDlg->ShowWindow(SW_HIDE);	
 	m_pManualLoadingDlg->ShowWindow(SW_HIDE);
 
 	m_rdoManualLoading.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);

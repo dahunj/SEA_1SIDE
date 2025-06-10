@@ -166,10 +166,9 @@
     <ClInclude Include="ListBoxDlg.h" />
     <ClInclude Include="LogFile.h" />
     <ClInclude Include="ManualDlg.h" />
-    <ClInclude Include="ManualElevatorDlg.h" />
+    <ClInclude Include="Manual_InspectorDlg.h" />
     <ClInclude Include="ManualInspectorDlg.h" />
     <ClInclude Include="ManualLoadingDlg.h" />
-    <ClInclude Include="ManualLotDataDlg.h" />
     <ClInclude Include="ManualPicker2Dlg.h" />
     <ClInclude Include="ManualPicker3Dlg.h" />
     <ClInclude Include="ManualPickerDlg.h" />
@@ -227,10 +226,9 @@
     <ClCompile Include="ListBoxDlg.cpp" />
     <ClCompile Include="LogFile.cpp" />
     <ClCompile Include="ManualDlg.cpp" />
-    <ClCompile Include="ManualElevatorDlg.cpp" />
+    <ClCompile Include="Manual_InspectorDlg.cpp" />
     <ClCompile Include="ManualInspectorDlg.cpp" />
     <ClCompile Include="ManualLoadingDlg.cpp" />
-    <ClCompile Include="ManualLotDataDlg.cpp" />
     <ClCompile Include="ManualPicker2Dlg.cpp" />
     <ClCompile Include="ManualPicker3Dlg.cpp" />
     <ClCompile Include="ManualPickerDlg.cpp" />

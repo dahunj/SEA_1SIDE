@@ -3,12 +3,11 @@
 #pragma once
 
 
-#include "ManualElevatorDlg.h"
+#include "Manual_InspectorDlg.h"
 #include "ManualPickerDlg.h"
 #include "ManualInspectorDlg.h"
 #include "ManualPicker2Dlg.h"
 #include "ManualPicker3Dlg.h"
-#include "ManualLotDataDlg.h"
 #include "ManualLoadingDlg.h"
 
 // CManualDlg 대화 상자입니다.
@@ -63,13 +62,11 @@ protected:
 
 
 public:	
-	CManualElevatorDlg	*m_pManual_InspectorDlg;
+	CManual_InspectorDlg	*m_pManual_InspectorDlg;
 	CManualPickerDlg	*m_pManual_NGGoodPickerDlg;
 	CManualInspectorDlg	*m_pManual_UnloadingDlg;
-
 	CManualPicker2Dlg	*m_pManual_LoadPickerDlg;
 	CManualPicker3Dlg	*m_pManual_UnloadPickerDlg;
-	CManualLotDataDlg	*m_pManualLotDataDlg;
 	CManualLoadingDlg	*m_pManualLoadingDlg;
 
 private:
