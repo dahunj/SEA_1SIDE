@@ -67,7 +67,7 @@ public:
 	CManual_UnloadingDlg	*m_pManual_UnloadingDlg;
 	CManual_LoadPickerDlg	*m_pManual_LoadPickerDlg;
 	CManual_UnloadPickerDlg	*m_pManual_UnloadPickerDlg;
-	CManual_LoadingDlg	*m_pManualLoadingDlg;
+	CManual_LoadingDlg		*m_pManual_LoadingDlg;
 
 private:
 	void Initial_Controls();

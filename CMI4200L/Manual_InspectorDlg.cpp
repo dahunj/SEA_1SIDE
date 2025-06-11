@@ -32,14 +32,8 @@ void CManual_InspectorDlg::DoDataExchange(CDataExchange* pDX)
 	for (int i = 0; i < 5; i++) DDX_Control(pDX, IDC_STC_AXIS_POS_0 + i, m_stcAxisPos[i]);
 	DDX_Control(pDX, IDC_STC_AXIS_POS_5, m_stcAxisPos[5]);
 
-	DDX_Control(pDX, IDC_BTN_VISION_Y_0, m_btnVisionY[0]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_1, m_btnVisionY[1]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_2, m_btnVisionY[2]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_3, m_btnVisionY[3]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_4, m_btnVisionY[4]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_5, m_btnVisionY[5]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_6, m_btnVisionY[6]);
-	DDX_Control(pDX, IDC_BTN_VISION_Y_7, m_btnVisionY[7]);
+	DDX_Control(pDX, IDC_BTN_INDEX_R_MOVE, m_btnIndexRotate);
+	
 	DDX_Control(pDX, IDC_BTN_VISION_A_0, m_btnVisionA[0]);
 	DDX_Control(pDX, IDC_BTN_VISION_Z_0, m_btnVisionZ[0]);
 	DDX_Control(pDX, IDC_BTN_VISION_Z_1, m_btnVisionZ[1]);
@@ -160,14 +154,8 @@ void CManual_InspectorDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CManual_InspectorDlg, CDialogEx)
 	ON_WM_DESTROY()
 	ON_WM_SHOWWINDOW()
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_0, IDC_BTN_VISION_Y_0, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_1, IDC_BTN_VISION_Y_1, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_2, IDC_BTN_VISION_Y_2, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_3, IDC_BTN_VISION_Y_3, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_4, IDC_BTN_VISION_Y_4, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_5, IDC_BTN_VISION_Y_5, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_6, IDC_BTN_VISION_Y_6, OnBtnVisionYClick)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Y_7, IDC_BTN_VISION_Y_7, OnBtnVisionYClick)
+	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_INDEX_R_MOVE, IDC_BTN_INDEX_R_MOVE, OnBtnVisionYClick)
+	
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_A_0, IDC_BTN_VISION_A_0, OnBtnVisionAClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Z_0, IDC_BTN_VISION_Z_0, OnBtnVisionZClick)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_BTN_VISION_Z_1, IDC_BTN_VISION_Z_1, OnBtnVisionZClick)
@@ -481,7 +469,7 @@ void CManual_InspectorDlg::Display_Status()
 	bShow = FALSE;
 	if (pEquipData->bUseManagerMode) bShow = TRUE;
 
-	m_btnVisionY[0].ShowWindow(bShow);
+	m_btnIndexRotate.ShowWindow(bShow);
 	m_btnVisionA[0].ShowWindow(bShow);
 	m_btnVisionZ[0].ShowWindow(bShow);
 	m_btnBarcodeA[0].ShowWindow(bShow);
@@ -566,23 +554,9 @@ void CManual_InspectorDlg::OnBtnVisionYClick(UINT nID)
 
 	if (pDX2->iInspCMAlign1In && !pDX2->iInspCMAlign1Out && pDX2->iInspCMAlign2In && !pDX2->iInspCMAlign2Out && 
 		pDX2->iInspCMAlign3In && !pDX2->iInspCMAlign3Out && pDX2->iInspCMAlign4In && !pDX2->iInspCMAlign4Out ) {
-		if (nID == IDC_BTN_VISION_Y_0) {
+		if (nID == IDC_BTN_INDEX_R_MOVE) {
 			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_1) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_2) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_3) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_4) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_5) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_6) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		} else if (nID == IDC_BTN_VISION_Y_7) {
-			pCommon->Move_Position(AX_INDEX_R, 0);
-		}
+		} 
 	} else {
 		AfxMessageBox(_T("Index Align 1~4 In후 진행하세요............."));
 		return;

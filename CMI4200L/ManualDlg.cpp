@@ -97,8 +97,8 @@ BOOL CManualDlg::OnInitDialog()
 	m_pManual_UnloadPickerDlg = new CManual_UnloadPickerDlg(this);
 	m_pManual_UnloadPickerDlg->Create(IDD_MANUAL_UNLOADPICKER_DLG, this);
 	
-	m_pManualLoadingDlg = new CManual_LoadingDlg(this);
-	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
+	m_pManual_LoadingDlg = new CManual_LoadingDlg(this);
+	m_pManual_LoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
 	// Inspector Dlg Visible
 	m_rdoManual_Unloading.SetCheck(TRUE);
@@ -117,7 +117,7 @@ void CManualDlg::OnDestroy()
 	m_pManual_UnloadingDlg->DestroyWindow();
 	m_pManual_NGGoodPickerDlg->DestroyWindow();
 	m_pManual_InspectorDlg->DestroyWindow();	
-	m_pManualLoadingDlg->DestroyWindow();
+	m_pManual_LoadingDlg->DestroyWindow();
 	m_pManual_LoadPickerDlg->DestroyWindow();
 	m_pManual_UnloadPickerDlg->DestroyWindow();
 
@@ -132,7 +132,7 @@ void CManualDlg::OnDestroy()
 	m_pManual_InspectorDlg = NULL;
 	m_pManual_LoadPickerDlg = NULL;
 	m_pManual_UnloadPickerDlg = NULL;	
-	m_pManualLoadingDlg = NULL;
+	m_pManual_LoadingDlg = NULL;
 }
 
 BOOL CManualDlg::PreTranslateMessage(MSG* pMsg) 
@@ -148,7 +148,7 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	CDialogEx::OnShowWindow(bShow, nStatus);
 
 	if (bShow) {
-		if (m_rdoManualLoading.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_SHOW);
+		if (m_rdoManualLoading.GetCheck()) m_pManual_LoadingDlg->ShowWindow(SW_SHOW);
 		if (m_rdoManualLoadPicker.GetCheck()) m_pManual_LoadPickerDlg->ShowWindow(SW_SHOW);
 		if (m_rdoManual_UnloadPicker.GetCheck()) m_pManual_UnloadPickerDlg->ShowWindow(SW_SHOW);
 		if (m_rdoManual_Inspector.GetCheck()) m_pManual_InspectorDlg->ShowWindow(SW_SHOW);
@@ -168,7 +168,7 @@ void CManualDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 //		m_rdoManualDoorLock.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 //		m_rdoManualDoorUnlock.Set_Color(RGB(0x00, 0x00, 0xFF), COLOR_DEFAULT);
 
-		if (m_rdoManualLoading.GetCheck()) m_pManualLoadingDlg->ShowWindow(SW_HIDE);		
+		if (m_rdoManualLoading.GetCheck()) m_pManual_LoadingDlg->ShowWindow(SW_HIDE);		
 		if (m_rdoManualLoadPicker.GetCheck()) m_pManual_LoadPickerDlg->ShowWindow(SW_HIDE);
 		if (m_rdoManual_UnloadPicker.GetCheck()) m_pManual_UnloadPickerDlg->ShowWindow(SW_HIDE);
 		if (m_rdoManual_Inspector.GetCheck()) m_pManual_InspectorDlg->ShowWindow(SW_HIDE);
@@ -198,8 +198,8 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 	} else if (m_pManual_UnloadingDlg->IsWindowVisible()) {
 		m_pManual_UnloadingDlg->Display_Status();
 	} 
-	else if (m_pManualLoadingDlg->IsWindowVisible()) {
-		m_pManualLoadingDlg->Display_Status();
+	else if (m_pManual_LoadingDlg->IsWindowVisible()) {
+		m_pManual_LoadingDlg->Display_Status();
 	}
 
 	SetTimer(0, 100, NULL);
@@ -208,12 +208,12 @@ void CManualDlg::OnTimer(UINT nIDEvent)
 
 void CManualDlg::OnBnClickedRdoManualLoading()
 {
-	if (m_pManualLoadingDlg->IsWindowVisible()) return;
+	if (m_pManual_LoadingDlg->IsWindowVisible()) return;
 	Hide_Windows();
 	CLogFile *pLogFile = CLogFile::Get_Instance();
 	pLogFile->Save_HandlerLog("[Manual - Loading] Start");
 	m_rdoManualLoading.Set_Color(RGB(0xFF, 0x00, 0x00), COLOR_DEFAULT);
-	m_pManualLoadingDlg->ShowWindow(SW_SHOW);
+	m_pManual_LoadingDlg->ShowWindow(SW_SHOW);
 }
 
 void CManualDlg::OnBnClickedRdoManualLoadPicker()
@@ -321,7 +321,7 @@ void CManualDlg::Hide_Windows()
 	m_pManual_LoadPickerDlg->ShowWindow(SW_HIDE);
 	m_pManual_UnloadPickerDlg->ShowWindow(SW_HIDE);
 	m_pManual_UnloadingDlg->ShowWindow(SW_HIDE);	
-	m_pManualLoadingDlg->ShowWindow(SW_HIDE);
+	m_pManual_LoadingDlg->ShowWindow(SW_HIDE);
 
 	m_rdoManualLoading.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);
 	m_rdoManualLoadPicker.Set_Color(RGB(0x00, 0x00, 0x00), COLOR_DEFAULT);

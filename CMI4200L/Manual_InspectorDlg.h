@@ -15,7 +15,7 @@ public:
 	// 대화 상자 데이터입니다.
 	enum { IDD = IDD_MANUAL_INSPECTOR_DLG };
 	CStaticCS	m_stcAxisPos[6];
-	CButtonCS	m_btnVisionY[8];
+	CButtonCS	m_btnIndexRotate;
 	CButtonCS	m_btnVisionA[1];
 	CButtonCS	m_btnVisionZ[2];
 	CButtonCS	m_btnBarcodeA[1];
