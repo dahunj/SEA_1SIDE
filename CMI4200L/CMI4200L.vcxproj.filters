@@ -171,12 +171,6 @@
     <ClInclude Include="ManualDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ManualPickerDlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ManualInspectorDlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="SetupDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -273,9 +267,6 @@
     <ClInclude Include="MinidumpHelp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ManualPicker2Dlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Data.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -294,13 +285,7 @@
     <ClInclude Include="ListBoxDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ManualLoadingDlg.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Barcode_DS1100.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ManualPicker3Dlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PauseDlg.h">
@@ -316,6 +301,21 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Manual_InspectorDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_UnloadingDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_LoadingDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_LoadPickerDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_UnloadPickerDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual_NgGoodPickerDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -342,12 +342,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ManualDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ManualPickerDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ManualInspectorDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SetupDlg.cpp">
@@ -443,9 +437,6 @@
     <ClCompile Include="MinidumpHelp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ManualPicker2Dlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Data.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -464,13 +455,7 @@
     <ClCompile Include="ListBoxDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ManualLoadingDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Barcode_DS1100.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ManualPicker3Dlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PauseDlg.cpp">
@@ -486,6 +471,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Manual_InspectorDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_UnloadingDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_LoadingDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_LoadPickerDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_UnloadPickerDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual_NgGoodPickerDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

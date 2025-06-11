@@ -1,23 +1,18 @@
-// ManualInspectorDlg.h : 헤더 파일
-//
 #pragma once
 
-#define SCAN_INSPECT	0
-#define SCAN_CALIBRATE	1
-#define SCAN_LASER		2
 
-// CManualInspectorDlg 대화 상자입니다.
+// CManual_LoadingDlg 대화 상자입니다.
 
-class CManualInspectorDlg : public CDialogEx
+class CManual_LoadingDlg : public CDialogEx
 {
-	DECLARE_DYNAMIC(CManualInspectorDlg)
+	DECLARE_DYNAMIC(CManual_LoadingDlg)
 
 public:
-	CManualInspectorDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
-	virtual ~CManualInspectorDlg();
+	CManual_LoadingDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
+	virtual ~CManual_LoadingDlg();
 
-	// 대화 상자 데이터입니다.
-	enum { IDD = IDD_MANUAL_UNLOADING_DLG };
+// 대화 상자 데이터입니다.
+	enum { IDD = IDD_MANUAL_LOADING_DLG };
 	CStaticCS	m_stcAxisPos[4];
 	CButtonCS	m_btnTR1Y[3];
 	CButtonCS	m_btnTR1Z[4];
@@ -50,15 +45,11 @@ protected:
 	afx_msg void OnBtnTR2YClick(UINT nID);
 	afx_msg void OnBtnTR2ZClick(UINT nID);
 	afx_msg void OnBtnTR2IOClick(UINT nID);
-	
+
 private:
 	void Initial_Controls();
-
 
 public:
 	void Display_Status();
 
-
 };
-
-///////////////////////////////////////////////////////////////////////////////

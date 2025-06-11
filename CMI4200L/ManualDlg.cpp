@@ -85,19 +85,19 @@ BOOL CManualDlg::OnInitDialog()
 	m_pManual_InspectorDlg = new CManual_InspectorDlg(this);
 	m_pManual_InspectorDlg->Create(IDD_MANUAL_INSPECTOR_DLG, this);
 
-	m_pManual_NGGoodPickerDlg = new CManualPickerDlg(this);
+	m_pManual_NGGoodPickerDlg = new CManual_NgGoodPickerDlg(this);
 	m_pManual_NGGoodPickerDlg->Create(IDD_MANUAL_NG_GOOD_PICKER_DLG, this);
 
-	m_pManual_UnloadingDlg = new CManualInspectorDlg(this);
+	m_pManual_UnloadingDlg = new CManual_UnloadingDlg(this);
 	m_pManual_UnloadingDlg->Create(IDD_MANUAL_UNLOADING_DLG, this);
 
-	m_pManual_LoadPickerDlg = new CManualPicker2Dlg(this);
+	m_pManual_LoadPickerDlg = new CManual_LoadPickerDlg(this);
 	m_pManual_LoadPickerDlg->Create(IDD_MANUAL_LOADPICKER_DLG, this);
 
-	m_pManual_UnloadPickerDlg = new CManualPicker3Dlg(this);
+	m_pManual_UnloadPickerDlg = new CManual_UnloadPickerDlg(this);
 	m_pManual_UnloadPickerDlg->Create(IDD_MANUAL_UNLOADPICKER_DLG, this);
 	
-	m_pManualLoadingDlg = new CManualLoadingDlg(this);
+	m_pManualLoadingDlg = new CManual_LoadingDlg(this);
 	m_pManualLoadingDlg->Create(IDD_MANUAL_LOADING_DLG, this);
 
 	// Inspector Dlg Visible
