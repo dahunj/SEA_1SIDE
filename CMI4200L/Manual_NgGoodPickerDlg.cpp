@@ -314,6 +314,12 @@ void CManual_NgGoodPickerDlg::OnBtnPickerXClick(UINT nID)
 		return;
 	}
 
+	if (!pCommon->Check_Position(AX_GOOD_PICKER_Z, 0) ) 
+	{
+		AfxMessageBox(_T("Good Picker Ready Up후 진행하세요............."));
+		return;
+	}
+
 	int ID = nID - IDC_BTN_PICKER_X_0;
 
 	switch( ID )
@@ -325,16 +331,10 @@ void CManual_NgGoodPickerDlg::OnBtnPickerXClick(UINT nID)
 		}
 		break;
 	case 1:		// Unload
-		if (pCommon->Check_Position(AX_GOOD_PICKER_Z, 1) ) 
-		{
-			pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);
-		}
+		pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);		
 		break;
 	case 2:		// Pitch Move
-		if (pCommon->Check_Position(AX_GOOD_PICKER_Z, 1) ) 
-		{
-			pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);
-		}
+		pCommon->Move_Position(AX_GOOD_PICKER_Y, ID);		
 		break;
 	default:
 		break;
@@ -372,6 +372,13 @@ void CManual_NgGoodPickerDlg::OnBtnPickerYClick(UINT nID)
 		AfxMessageBox(_T("Good Picker Up후 진행하세요............."));
 		return;
 	}
+	
+	if (!pCommon->Check_Position(AX_GOOD_PICKER_Z, 0) ) 
+	{
+		AfxMessageBox(_T("Good Picker Ready Up후 진행하세요............."));
+		return;
+	}
+
 
 	if (nID == IDC_BTN_PICKER_Y_0) {
 		pCommon->Move_Position(AX_GOOD_PICKER_Y, 1);
@@ -427,7 +434,7 @@ void CManual_NgGoodPickerDlg::OnBtnNGPickXClick(UINT nID)
 	}
 #endif
 
-	if (/*!pCommon->Check_Position(AX_NG_PICKER_Z, 0) && */!pCommon->Check_Position(AX_NG_PICKER_Z, 1)) {
+	if (!pCommon->Check_Position(AX_NG_PICKER_Z, 1)) {
 		AfxMessageBox(_T("NG Picker Z축 NG Position 위치후에 진행하세요....."));
 		return;
 	}
