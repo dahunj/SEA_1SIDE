@@ -327,6 +327,7 @@ BOOL CSequenceInit::Initial_Load1Run()
 		break;
 
 	case 110:
+		if(m_nInitLDPickerCase < 151) return TRUE;
 		pLogFile->Save_HandlerLog("[Initial Sequence - Load1Run] start");
 				
 		m_nInitLoad1Case = 111;
@@ -515,6 +516,7 @@ BOOL CSequenceInit::Initial_Unload1Run()
 		break;
 
 	case 110:
+		if(m_nInitULPickerCase < 151) return TRUE;
 		pLogFile->Save_HandlerLog("[Initial Sequence - Unload1Run] start");
 				
 		m_nInitUnload1Case = 111;
@@ -1414,6 +1416,11 @@ BOOL CSequenceInit::Initial_IndexTRun()
 		break;
 
 	case 110:
+		if(m_nInitLDPickerCase < 151) return TRUE;
+		if(m_nInitULPickerCase < 151) return TRUE;
+		if(m_nInitNGPickerCase < 151) return TRUE;
+		if(m_nInitGDPickerCase < 151) return TRUE;
+		if(m_nInitInspectCase < 113) return TRUE;
 		pLogFile->Save_HandlerLog("[Initial Sequence - IndexTRun] start");
 				
 		m_nInitIndexTCase = 111;
@@ -1596,6 +1603,7 @@ BOOL CSequenceInit::Initial_NGTrayRun()
 		break;
 
 	case 110:
+		if(m_nInitNGPickerCase < 151) return TRUE;
 		pLogFile->Save_HandlerLog("[Initial Sequence - NGTrayRun] start");
 				
 		m_nInitNGTrayCase = 111;
