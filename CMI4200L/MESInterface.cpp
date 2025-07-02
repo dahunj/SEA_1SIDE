@@ -682,9 +682,42 @@ void CMESInterface::Set_Result(CString sLotID, CString sBarID, CString sJudge, C
 	m_nNGPocket[m_nTCount] = nNGPno;
 	m_nTCount++;
 
-	if (m_nTCount >= APD_COUNT) Write_APD();
+	//if (m_nTCount >= APD_COUNT) Write_APD();
 
 	if (nBarErr==1) Sleep(5);
+}
+
+void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString sJudge, CString sNGCode, CString NGText, int nLTray, int nLPno, int nUTray, int nUPno,int nNGTray, int nNGPno)
+{
+	CString strPathData, strFileData, strSaveData;
+	strPathData.Format("%s%s%s%s", APD_FOLDER, m_sDate[0], m_sDate[1], m_sDate[2]);
+	strFileData.Format("%s\\%s.dat", strPathData, m_sLotID);
+	Create_Folder(strPathData);
+
+
+	CString sTime;
+	SYSTEMTIME time;
+	GetLocalTime(&time);
+	
+	sTime.Format("%04d/%02d/%02d %02d:%02d:%02d", time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute, time.wSecond);
+	
+	CFile fileData;
+	if (fileData.Open(strFileData, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
+	{
+		try {
+			strSaveData.Format("[%s],%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d\r\n", sTime, EQUIP_TYPE, sLotID,
+					sBarID, sJudge, sNGCode, NGText, nLTray, nLPno, nUTray, nUPno, nNGTray, nNGPno);
+
+				fileData.Write(strSaveData, strSaveData.GetLength());
+			
+			fileData.Close();
+
+		} catch (CFileException *pEx) {
+			pEx->Delete();
+		}
+	}
+
+
 }
 
 void CMESInterface::Write_APD()

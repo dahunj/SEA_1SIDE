@@ -3727,10 +3727,10 @@ BOOL CSequenceMain::NGPicker_Run()
 			}	
 
 			gData.PickerInfor[1][gData.NGPicNo-1] = 0;
-//			g_objMES.Set_Result(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "NG", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, 0,0, gData.nNGTrayPos, nNGPos);
+			//g_objMES.Set_Result(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "NG", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, 0,0, gData.nNGTrayPos, nNGPos);
 			
 			pLogFile->Save_CmTrackingLog("NG", gData.nNGTrayPos, gData.NGIdxNo, nYY, gData.PickerNGTrayNo, gData.PickerNGPoNo[gData.NGPicNo-1]);
-
+			g_objMES.Save_ProcessedData(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "NG", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, 0,0, gData.nNGTrayPos, nNGPos);
 			CString strLog, sIndx, sNGdx, sPicker;
 			sIndx.Format("%1d%1d%1d%1d%1d%1d", gData.IndexInfo[2][0], gData.IndexInfo[2][1], gData.IndexInfo[2][2], gData.IndexInfo[2][3], gData.IndexInfo[2][4], gData.IndexInfo[2][5]);
 			sNGdx.Format("%1d%1d%1d%1d%1d%1d", gData.NG1TrayInfo[nYY-1][0], gData.NG1TrayInfo[nYY-1][1], gData.NG1TrayInfo[nYY-1][2], gData.NG1TrayInfo[nYY-1][3], gData.NG1TrayInfo[nYY-1][4], gData.NG1TrayInfo[nYY-1][5]);
@@ -5179,8 +5179,9 @@ BOOL CSequenceMain::ULPicker_Run()
 						g_objCapAttachUDP.Set_BarcodeUpdate(gData.nPortNo, gData.nGoodTrayCount+1, nGdPos, gLot.sBarLoad[nTNo][nPno]);
 						//g_objCapAttachUDP.Set_BarcodeUpdate(1, gData.nGoodTrayCount+1, nGdPos, gLot.sBarLoad[nTNo][nPno]);
 					}
-//					g_objMES.Set_Result(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "OK", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, gData.nGoodTrayNo, nGdPos, 0,0);
+					//g_objMES.Set_Result(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "OK", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, gData.nGoodTrayNo, nGdPos, 0,0);
 					pLogFile->Save_CmTrackingLog("GOOD", gData.nGoodTrayCount+1, i+1, w+1, gData.PickerUnTrayNo[i], gData.PickerUnPoNo[i]);
+					g_objMES.Save_ProcessedData(gLot.sLotID, gLot.sBarLoad[nTNo][nPno], "OK", gLot.sNGCode[nTNo][nPno], gLot.sNGText[nTNo][nPno], nTNo+1, nPno+1, gData.nGoodTrayNo, nGdPos, 0,0);
 					m_nUnloadLotCmCnt++;
 				}
 			}

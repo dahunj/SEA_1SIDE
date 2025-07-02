@@ -576,8 +576,14 @@ void CInspector::Get_InspectComplete(int nInspector, CString strRecv)
 			else if (sData[i] == "E") { nJugdeNo = 3;}					//Empty
 			else					  { nJugdeNo = 2;}
 
-			if		(nJugdeNo == 1) g_objMES.Set_Result(gLot.sLotID, sBarcode[i], "OK", sNGcode[i], sNGText[i], nTrayNo, (cm+i+1), 0,0,0,0);
-			else if (nJugdeNo != 3) g_objMES.Set_Result(gLot.sLotID, sBarcode[i], "NG", sNGcode[i], sNGText[i], nTrayNo, (cm+i+1), 0,0,0,0);
+			if		(nJugdeNo == 1)
+			{
+				g_objMES.Set_Result(gLot.sLotID, sBarcode[i], "OK", sNGcode[i], sNGText[i], nTrayNo, (cm+i+1), 0,0,0,0);				
+			}
+			else if (nJugdeNo != 3)
+			{
+				g_objMES.Set_Result(gLot.sLotID, sBarcode[i], "NG", sNGcode[i], sNGText[i], nTrayNo, (cm+i+1), 0,0,0,0);
+			}
 		}
 		gLot.nInsResult[nTrayNo-1][cm+i] = gLot.nBarResult[nTrayNo-1][cm+i] = nJugdeNo;
 		gLot.sBarLoad[nTrayNo-1][cm+i] = sBarcode[i];

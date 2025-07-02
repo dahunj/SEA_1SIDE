@@ -70,6 +70,8 @@ public:
 	void Save_AviApdData(CString sLotID, int nPortNo, CString sOperID);
 	void Save_AviRmsData(CString sKey, CString sValue);
 
+	void Save_ProcessedData(CString sLotID, CString sBarID, CString sJudge, CString sNGCode, CString NGText, int nLTray, int nLPno, int nUTray, int nUPno,int nNGTray, int nNGPno);
+
 	void Clear_APDResult();
 	BOOL Read_APDResult();
 };
