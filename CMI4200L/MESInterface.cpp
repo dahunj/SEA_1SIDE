@@ -18,6 +18,8 @@
 #define MES_FOLDER_RMS			"D:\\MES\\Recipe\\"
 #define MES_FOLDER_APD_RESULT	"D:\\EVMS\\TP\\MES\\VALIDATION\\"
 
+#define BACKUP_FOLDER			"D:\\DUMP\\"
+
 #define EQUIP_TYPE		"S"	//Single:S, Dual:D"
 #define APD_COUNT		100	//전송Max수량
 #define APD_MAX_COUNT	500	//전송Max수량
@@ -694,6 +696,11 @@ void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString s
 	strFileData.Format("%s\\%s.dat", strPathData, m_sLotID);
 	Create_Folder(strPathData);
 
+	CString strPathBack, strFileBack, strSaveBack;
+	strPathBack.Format("%s%s%s%s", BACKUP_FOLDER, m_sDate[0], m_sDate[1], m_sDate[2]);
+	strFileBack.Format("%s\\%s.dat", strPathBack, m_sLotID);
+	Create_Folder(strPathBack);
+
 
 	CString sTime;
 	SYSTEMTIME time;
@@ -711,6 +718,22 @@ void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString s
 				fileData.Write(strSaveData, strSaveData.GetLength());
 			
 			fileData.Close();
+
+		} catch (CFileException *pEx) {
+			pEx->Delete();
+		}
+	}
+
+	CFile BackData;
+	if (BackData.Open(strFileData, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
+	{
+		try {
+			strSaveBack.Format("[%s],%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d\r\n", sTime, EQUIP_TYPE, sLotID,
+				sBarID, sJudge, sNGCode, NGText, nLTray, nLPno, nUTray, nUPno, nNGTray, nNGPno);
+
+			BackData.Write(strSaveBack, strSaveBack.GetLength());
+
+			BackData.Close();
 
 		} catch (CFileException *pEx) {
 			pEx->Delete();
