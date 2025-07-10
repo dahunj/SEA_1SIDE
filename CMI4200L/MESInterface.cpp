@@ -332,6 +332,29 @@ void CMESInterface::Start_Send()
 			pEx->Delete();
 		}
 	}
+
+
+	CString strPath2, strFile2, strSave2, sState2;
+	strPath2.Format("%s%04d%02d%02d", BACKUP_FOLDER, time.wYear, time.wMonth, time.wDay);
+	strFile2.Format("%s\\%04d%02d%02d.txt", strPath2, time.wYear, time.wMonth, time.wDay);
+	Create_Folder(strPath2);
+
+	CFile file2;
+	if (file2.Open(strFile2, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite)) {
+		try {
+			file2.SeekToEnd();
+
+			sState2 = "LotStart";
+			strSave2.Format("[%04d/%02d/%02d %02d:%02d:%02d],%s,UNITID=1000,TYPE=%s,LOTID=%s,COUNT=%d,USERID=%s\r\n",
+				time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute, time.wSecond, sState2, EQUIP_TYPE, m_sMESLotID, m_nMESCount, m_sOperID);
+			file2.Write(strSave2, strSave2.GetLength());
+
+			file2.Close();
+
+		} catch (CFileException *pEx) {
+			pEx->Delete();
+		}
+	}
 	g_csMesLog.Unlock();
 }
 
@@ -516,6 +539,28 @@ void CMESInterface::Set_LotStart(CString sLotID, int nCount, CString sOperID)
 			pEx->Delete();
 		}
 	}
+
+	CString strPath2, strFile2, strSave2, sState2;
+	strPath2.Format("%s%04d%02d%02d", BACKUP_FOLDER, time.wYear, time.wMonth, time.wDay);
+	strFile2.Format("%s\\%04d%02d%02d.txt", strPath2, time.wYear, time.wMonth, time.wDay);
+	Create_Folder(strPath2);
+
+	CFile file2;
+	if (file2.Open(strFile2, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite)) {
+		try {
+			file2.SeekToEnd();
+
+			sState2 = "JobReady";
+			strSave2.Format("[%04d/%02d/%02d %02d:%02d:%02d],%s,UNITID=1000,TYPE=%s,LOTID=%s,COUNT=%d,USERID=%s\r\n",
+				time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute, time.wSecond, sState2, EQUIP_TYPE, sLotID, nCount, sOperID);
+			file2.Write(strSave2, strSave2.GetLength());
+
+			file2.Close();
+
+		} catch (CFileException *pEx) {
+			pEx->Delete();
+		}
+	}
 	g_objMES.m_nMESSequence = 1;
 
 	g_csMesLog.Unlock();
@@ -691,32 +736,38 @@ void CMESInterface::Set_Result(CString sLotID, CString sBarID, CString sJudge, C
 
 void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString sJudge, CString sNGCode, CString NGText, int nLTray, int nLPno, int nUTray, int nUPno,int nNGTray, int nNGPno)
 {
+
+	SYSTEMTIME time;
+	GetLocalTime(&time);
+
+	m_sLotID = sLotID;
+	
+	m_sDate[0].Format("%04d", time.wYear);
+	m_sDate[1].Format("%02d", time.wMonth);
+	m_sDate[2].Format("%02d", time.wDay);
+
+	CString sTime;	
+	sTime.Format("%04d/%02d/%02d %02d:%02d:%02d", time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute, time.wSecond);
+
+	g_csMesData.Lock();
+	
 	CString strPathData, strFileData, strSaveData;
 	strPathData.Format("%s%s%s%s", APD_FOLDER, m_sDate[0], m_sDate[1], m_sDate[2]);
 	strFileData.Format("%s\\%s.dat", strPathData, m_sLotID);
 	Create_Folder(strPathData);
 
-	CString strPathBack, strFileBack, strSaveBack;
-	strPathBack.Format("%s%s%s%s", BACKUP_FOLDER, m_sDate[0], m_sDate[1], m_sDate[2]);
-	strFileBack.Format("%s\\%s.dat", strPathBack, m_sLotID);
-	Create_Folder(strPathBack);
-
-
-	CString sTime;
-	SYSTEMTIME time;
-	GetLocalTime(&time);
-	
-	sTime.Format("%04d/%02d/%02d %02d:%02d:%02d", time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute, time.wSecond);
 	
 	CFile fileData;
 	if (fileData.Open(strFileData, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
 	{
 		try {
-			strSaveData.Format("[%s],%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d\r\n", sTime, EQUIP_TYPE, sLotID,
-					sBarID, sJudge, sNGCode, NGText, nLTray, nLPno, nUTray, nUPno, nNGTray, nNGPno);
 
-				fileData.Write(strSaveData, strSaveData.GetLength());
-			
+			fileData.SeekToEnd();
+			strSaveData.Format("[%s],%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d\r\n", sTime, EQUIP_TYPE, sLotID,
+				sBarID, sJudge, sNGCode, NGText, nLTray, nLPno, nUTray, nUPno, nNGTray, nNGPno);
+
+			fileData.Write(strSaveData, strSaveData.GetLength());
+
 			fileData.Close();
 
 		} catch (CFileException *pEx) {
@@ -724,10 +775,17 @@ void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString s
 		}
 	}
 
+	CString strPathBack, strFileBack, strSaveBack;
+	strPathBack.Format("%s%s%s%s", BACKUP_FOLDER, m_sDate[0], m_sDate[1], m_sDate[2]);
+	strFileBack.Format("%s\\%s.dat", strPathBack, m_sLotID);
+	Create_Folder(strPathBack);
+
 	CFile BackData;
-	if (BackData.Open(strFileData, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
+	if (BackData.Open(strFileBack, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
 	{
 		try {
+
+			BackData.SeekToEnd();
 			strSaveBack.Format("[%s],%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d\r\n", sTime, EQUIP_TYPE, sLotID,
 				sBarID, sJudge, sNGCode, NGText, nLTray, nLPno, nUTray, nUPno, nNGTray, nNGPno);
 
@@ -740,7 +798,7 @@ void CMESInterface::Save_ProcessedData(CString sLotID, CString sBarID, CString s
 		}
 	}
 
-
+	g_csMesData.Unlock();
 }
 
 void CMESInterface::Write_APD()
