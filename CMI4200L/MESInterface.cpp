@@ -607,7 +607,7 @@ void CMESInterface::Set_LotEnd(CString sLotID, int nCount, CString sOperID, int 
 
 	g_csMesLog.Lock();
 
-	Write_APD();
+	//Write_APD();
 	m_nSNo = 0;
 
 	SYSTEMTIME time;
