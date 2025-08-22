@@ -17,7 +17,7 @@
 
 #define UDP_VISION_IP		"192.168.1.12"
 //#define UDP_VISION_IP		"127.0.0.1"
-#define UDP_VISION_PORT		8000
+#define UDP_VISION_PORT		20000
 
 IMPLEMENT_DYNAMIC(CInspector, CWnd)
 
