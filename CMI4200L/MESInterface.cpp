@@ -513,6 +513,8 @@ void CMESInterface::Set_LotStart(CString sLotID, int nCount, CString sOperID)
 	Begin_MESThread();
 	if (g_objMES.m_nMESSequence!=0) return;
 
+	Sleep(500);
+
 	g_csMesLog.Lock();
 
 	SYSTEMTIME time;
